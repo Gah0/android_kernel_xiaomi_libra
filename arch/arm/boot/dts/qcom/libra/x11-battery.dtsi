@@ -1,0 +1,52 @@
+/* Copyright (c) 2020 The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/* x11-msm8992.dtsi */
+/{
+	mtp_batterydata: qcom,battery-data {
+		qcom,batt-id-range-pct = <15>;
+		#include "batterydata-x11-atl-3080mah.dtsi"
+		#include "batterydata-x11-lg-3080mah.dtsi"
+		#include "batterydata-itech-3020mah.dtsi"
+	};
+};
+
+/* msm-pmi8994.dtsi */
+&pmi8994_charger {
+			/delete-property/ qcom,autoadjust-vfloat;
+			/delete-property/ qcom,dc-psy-type;
+			/delete-property/ qcom,dc-psy-ma>;
+			/delete-property/ qcom,parallel-usb-min-current-ma;
+			/delete-property/ qcom,parallel-usb-9v-min-current-ma>;
+			/delete-property/ qcom,parallel-allowed-lowering-ma;
+			/delete-property/ qcom,thermal-mitigation>;
+			
+			qcom,iterm-ma = <120>;
+			qcom,fastchg-current-ma = <2300>;
+			qcom,float-voltage-mv = <4400>;
+			qcom,float-voltage-comp = <16>;
+			qcom,fastchg-current-comp = <900>;
+};
+
+&pmi8994_fg {
+			/delete-property/ qcom,fg-cc-cv-threshold-mv;
+			
+			fg-cutoff-voltage-mv = <3400>;
+			qcom,cycle-counter-low-soc = <15>;
+			qcom,cycle-counter-high-soc = <85>;
+			qcom,fg-chg-iterm-ma = <120>;
+			qcom,fg-iterm-ma = <150>;
+			qcom,resume-soc = <99>;
+			qcom,thermal-coefficients = [dd 85 63 4a e6 35];
+			qcom,vbat-estimate-diff-mv = <300>;
+};
+
